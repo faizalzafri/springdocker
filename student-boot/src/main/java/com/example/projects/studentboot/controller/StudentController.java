@@ -21,16 +21,16 @@ public class StudentController {
 	@Autowired
 	private StudentService studentService;
 
-	@GetMapping("/students/{studentId}/courses")
-	public List<Course> retrieveCoursesForStudent(@PathVariable String studentId) {
-		return studentService.retrieveCourses(studentId);
+	@GetMapping("/students/{studentName}/courses")
+	public List<Course> retrieveCoursesForStudent(@PathVariable String studentName) {
+		return studentService.retrieveCourses(studentName);
 	}
 
-	@PostMapping("/students/{studentId}/courses")
-	public ResponseEntity<Void> registerStudentForCourse(@PathVariable String studentId,
+	@PostMapping("/students/{studentName}/courses")
+	public ResponseEntity<Void> registerStudentForCourse(@PathVariable String studentName,
 			@RequestBody Course newCourse) {
 
-		Course course = studentService.addCourse(studentId, newCourse);
+		Course course = studentService.addCourse(studentName, newCourse);
 
 		if (course == null)
 			return ResponseEntity.noContent().build();
@@ -41,9 +41,9 @@ public class StudentController {
 		return ResponseEntity.created(location).build();
 	}
 
-	@GetMapping("/students/{studentId}/courses/{courseId}")
-	public Course retrieveDetailsForCourse(@PathVariable String studentId, @PathVariable String courseId) {
-		return studentService.retrieveCourse(studentId, courseId);
+	@GetMapping("/students/{studentName}/courses/{courseName}")
+	public Course retrieveDetailsForCourse(@PathVariable String studentName, @PathVariable String courseName) {
+		return studentService.retrieveCourse(studentName, courseName);
 	}
 
 }

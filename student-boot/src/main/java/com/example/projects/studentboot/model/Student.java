@@ -1,27 +1,46 @@
 package com.example.projects.studentboot.model;
 
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "student")
 public class Student {
-	private String id;
-	private String name;
-	private String description;
-	private List<Course> courses;
 
-	public Student(String id, String name, String description,
-			List<Course> courses) {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Long id;
+
+	@Column(name = "name")
+	private String name;
+
+	@Column(name = "description")
+	private String description;
+
+	@Column(name = "courses")
+	private String courses;
+	
+	public Student() {
+		
+	}
+
+	public Student(String name, String description, String courses) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.courses = courses;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -41,18 +60,16 @@ public class Student {
 		this.description = description;
 	}
 
-	public List<Course> getCourses() {
+	public String getCourses() {
 		return courses;
 	}
 
-	public void setCourses(List<Course> courses) {
+	public void setCourses(String courses) {
 		this.courses = courses;
 	}
 
 	@Override
 	public String toString() {
-		return String.format(
-				"Student [id=%s, name=%s, description=%s, courses=%s]", id,
-				name, description, courses);
+		return String.format("Student [id=%s, name=%s, description=%s, courses=%s]", id, name, description, courses);
 	}
 }
